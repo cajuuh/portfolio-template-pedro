@@ -1,0 +1,51 @@
+---
+import {
+  Dribbble,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Twitter,
+} from "lucide-astro";
+---
+
+<div
+  class="h-[400px] sm:h-[300px] lg:h-full flex flex-col-reverse lg:flex-col gap-4 overflow-hidden p-0"
+>
+  <!-- Top Content -->
+  <div
+    class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 right-grid-boxes flex-[2_0_0px] *:flex *:items-center *:justify-center overflow-hidden gap-3 *:transition-colors *:duration-300 *:ease-out lg:*:h-full *:rounded-[1.2rem] *:brightness-75 *:w-full lg:flex-[1.1_0_0px] social-media"
+  >
+    <div class="background-card hover:bg-sky-400">
+      <Twitter />
+      <div class="noise-effect"></div>
+    </div>
+    <div class="background-card hover:bg-pink-400">
+      <Dribbble />
+      <div class="noise-effect"></div>
+    </div>
+    <div class="background-card hover:bg-violet-500">
+      <Instagram />
+      <div class="noise-effect"></div>
+    </div>
+    <div class="background-card hover:bg-blue-400">
+      <Linkedin />
+      <div class="noise-effect"></div>
+    </div>
+    <div class="background-card hover:bg-blue-500">
+      <Facebook />
+      <div class="noise-effect"></div>
+    </div>
+    <div class="background-card hover:bg-red-500">
+      <Mail />
+      <div class="noise-effect"></div>
+    </div>
+  </div>
+  <!-- Bottom Content -->
+  <div
+    class="h-20 w-full *:h-full *:w-full gap-3 *:rounded-[2.1rem] border-none *:bg-white flex flex-[2_0_0px] lg:flex-col lg:flex-[3_0_0px]"
+  >
+    <div class="flex flex-[1_0_0px] right-grid-boxes"></div>
+    <div class="flex flex-[0.8_0_0px] right-grid-boxes"></div>
+  </div>
+</div>

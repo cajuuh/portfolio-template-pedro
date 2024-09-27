@@ -1,0 +1,65 @@
+---
+// ArrowHoverAnimation.astro
+import { ArrowUpRight } from "lucide-astro";
+---
+
+<!-- <div class="relative h-full w-full group"> -->
+<div
+  class="absolute bottom-7 right-7 p-1 border-2 border-foreground/20 rounded-full flex items-center justify-center transition-opacity duration-300 ease-in-out card-arrow"
+>
+  <!-- <ArrowUpRight class="text-black arrow-1 duration-300 ease-in-out" /> -->
+  <ArrowUpRight
+    class="text-gray-500 arrow-2 duration-300 ease-in-out"
+    size={30}
+  />
+</div>
+<!-- </div> -->
+
+<script is:inline>
+  import { animate } from "motion";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const hoverCard = document.querySelector(".arrow-boxes");
+
+    hoverCard.forEach((hoverCard) => {
+      const cardarrow = hoverCard.querySelector(".card-arrow");
+      const arrow1 = hoverCard.querySelector(".arrow-1");
+      const arrow2 = hoverCard.querySelector(".arrow-2");
+
+      hoverCard.addEventListener("mouseenter", () => {
+        animate(
+          cardarrow,
+          {
+            color: ["rgb(255 255 255)", "rgb(0 0 0)"],
+          },
+          { duration: 0.3 }
+        );
+        animate(
+          cardarrow,
+
+          { rotate: [0, 45] },
+          { duration: 0.3, delay: 0.1 }
+        );
+      });
+
+      hoverCard.addEventListener("mouseleave", () => {
+        animate(
+          cardarrow,
+          {
+            transform: ["translateY(-10px)", "translateY(0)"],
+            opacity: [1, 0.5],
+          },
+          { duration: 0.3 }
+        );
+        animate(
+          cardarrow,
+          {
+            transform: ["translateY(10px)", "translateY(0)"],
+            opacity: [0.5, 1],
+          },
+          { duration: 0.3, delay: 0.1 }
+        );
+      });
+    });
+  });
+</script>

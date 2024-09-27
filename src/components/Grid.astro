@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import LeftContentGrid from "@/components/leftContentGrid/LeftContentGrid.astro";
+import RightContentGrid from "@/components/rightContentGrid/RightContentGrid.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <main
+    class="rounded-[2.0rem] border-foreground m-4 grid lg:grid-cols-[2fr_0.6fr] gap-4 lg:h-[90vh]"
+  >
+    <LeftContentGrid />
+    <RightContentGrid />
+  </main>
+</Layout>

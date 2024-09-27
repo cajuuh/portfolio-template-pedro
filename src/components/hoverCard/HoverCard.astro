@@ -1,0 +1,65 @@
+---
+import { Fragment } from "astro/jsx-runtime";
+import { ArrowUpRight } from "lucide-astro";
+---
+
+<div class="relative h-full w-full group">
+  <div
+    class="absolute inset-0 h-full w-full bottom-0 hover-card-bg bg-gradient-to-t from-gray-800 to-transparent rounded-[2.1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+  >
+  </div>
+  <div
+    class="absolute bottom-4 px-6 pb-3 rounded-md w-full flex items-center justify-between text-foreground/50"
+  >
+    <span
+      class="text-foreground/50 opacity-0 hover-card-content group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0"
+      >Your Text Here</span
+    >
+    <div
+      class="h-8 w-8 border-2 border-foreground/50 hover-card-icon opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-full"
+    >
+      <ArrowUpRight />
+    </div>
+  </div>
+</div>
+
+<script>
+  import { animate } from "motion";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const hoverCards = document.querySelectorAll(".group");
+
+    hoverCards.forEach((hoverCard) => {
+      const hoverCardBg = hoverCard.querySelector(".hover-card-bg");
+      const hoverCardContent = hoverCard.querySelector(".hover-card-content");
+      const hoverCardIcon = hoverCard.querySelector(".hover-card-icon");
+
+      if (hoverCardBg && hoverCardContent && hoverCardIcon) {
+        hoverCard.addEventListener("mouseenter", () => {
+          animate(hoverCardBg, { opacity: [0, 1] }, { duration: 0.3 });
+          animate(
+            hoverCardContent,
+            { opacity: [0, 1], y: [10, 0] },
+            { duration: 0.3, delay: 0.1 }
+          );
+          animate(
+            hoverCardIcon,
+
+            { rotate: [0, 45] },
+            { duration: 0.5, delay: 0.2 }
+          );
+        });
+
+        hoverCard.addEventListener("mouseleave", () => {
+          animate(hoverCardBg, { opacity: [1, 0] }, { duration: 0.3 });
+          animate(
+            hoverCardContent,
+            { opacity: [1, 0], y: [0, 10] },
+            { duration: 0.3 }
+          );
+          animate(hoverCardIcon, { rotate: [45, 0] }, { duration: 0.5 });
+        });
+      }
+    });
+  });
+</script>

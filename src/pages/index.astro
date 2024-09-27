@@ -1,0 +1,69 @@
+---
+// import { ModeToggle } from "@/components/ModeToggle";
+import Layout from "../layouts/Layout.astro";
+import Grid from "@/components/Grid.astro";
+// import CustomAnimatedCursor from "@/components/animated-cursor/AnimatedCursor";
+---
+
+<script is:inline>
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
+</script>
+
+<Layout title="Welcome to Astro.">
+  <!-- <CustomAnimatedCursor client:load/> -->
+  <Grid />
+  <!-- <ModeToggle client:load /> -->
+</Layout>
+
+<!-- <script>
+  import { animate, spring, stagger } from "motion";
+
+  document.addEventListener("astro:page-load", () => {
+    animate(
+      ".grid-boxes",
+      {
+        opacity: [0, 1],
+        scale: [0.8, 1],
+      },
+      {
+        duration: 0.4,
+        delay: stagger(0.05),
+        easing: spring({ damping: 100, stiffness: 100 }),
+      }
+    );
+
+    animate(
+      ".right-grid-boxes",
+      {
+        opacity: [0, 1],
+        x: [-100, 0],
+        scale: [0.9, 1],
+      },
+      {
+        duration: 0.7,
+        delay: stagger(0.08),
+        easing: spring({ damping: 100, stiffness: 100 }),
+      }
+    );
+  });
+</script> -->

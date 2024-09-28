@@ -4,28 +4,28 @@ import HoverCard from "@/components/hoverCard/HoverCard.astro";
 ---
 
 <div
-  class="grid grid-cols-4 gap-4 lg:grid-cols-4 *:h-full custom-class *:rounded-[2.1rem] lg:grid-rows-1"
+  class="grid grid-cols-4 gap-4 lg:grid-cols-6 *:h-full custom-class *:rounded-[2.1rem] lg:grid-rows-1"
 >
   <div
     class="hidden sm:block sm:col-span-1 bg-white overflow-hidden grid-boxes"
   >
-    <!-- <img src="/portrait.avif" class="object-cover h-full w-full" /> -->
+    <img src="/portrait.avif" class="object-cover h-full w-full" />
   </div>
   <div
-    class="col-span-4 flex flex-col items-start justify-start sm:col-span-3 gap-8 lg:col-span-2 background-card p-10 grid-boxes"
+    class="col-span-4 flex flex-col items-start justify-start sm:col-span-3 gap-8 lg:col-span-3 background-card p-10 grid-boxes"
   >
     <ArrowHoverAnimation />
     <h2 class="text-lg font-light tracking-widest text-gray-500">ABOUT</h2>
-    <p class="text-foreground/60 text-2xl max-w-md">
+    <p class="text-foreground/60 text-3xl max-w-lg">
       Passionate about design and enjoy solving problems.
     </p>
     <div class="noise-effect"></div>
   </div>
   <div
-    class="col-span-4 h-72 relative lg:col-span-1 flex flex-col grid-boxes lg:h-full flex-1 group grid-boxes border bg-background/70 border-foreground/20 overflow-hidden"
+    class="col-span-4 h-72 relative lg:col-span-2 flex flex-col grid-boxes lg:h-full flex-1 group grid-boxes border bg-background/70 border-foreground/20 overflow-hidden"
   >
     <div
-      class="absolute inset-0 bg-[url('/project1.webp')] scale-125 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-110"
+      class="absolute inset-0 bg-[url('/project3.webp')] scale-110 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-100"
     >
     </div>
     <HoverCard />

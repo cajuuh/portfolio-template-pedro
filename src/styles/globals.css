@@ -116,5 +116,5 @@ body{
 }
 
 .background-card {
-  @apply border relative bg-background/70 border-foreground/10
+  @apply border relative bg-foreground/[0.02] border-foreground/10
 }

@@ -1,5 +1,7 @@
 ---
 import {
+  Clipboard,
+  Copy,
   Dribbble,
   Facebook,
   Instagram,
@@ -7,6 +9,8 @@ import {
   Mail,
   Twitter,
 } from "lucide-astro";
+import ArrowHoverAnimation from "../arrowHoverAnimation/ArrowHoverAnimation.astro";
+import { Button } from "../ui/button";
 ---
 
 <div
@@ -43,9 +47,34 @@ import {
   </div>
   <!-- Bottom Content -->
   <div
-    class="h-20 w-full *:h-full *:w-full gap-3 *:rounded-[2.1rem] border-none *:bg-white flex flex-[2_0_0px] lg:flex-col lg:flex-[3_0_0px]"
+    class="h-20 w-full *:h-full *:w-full gap-3 *:rounded-[2.1rem] flex flex-[2_0_0px] lg:flex-col lg:flex-[3_0_0px]"
   >
-    <div class="flex flex-[1_0_0px] right-grid-boxes"></div>
-    <div class="flex flex-[0.8_0_0px] right-grid-boxes"></div>
+    <div
+      class="flex flex-col p-8 gap-8 flex-[1_0_0px] right-grid-boxes background-card"
+    >
+      <ArrowHoverAnimation />
+      <h2 class="text-lg font-light tracking-widest text-gray-500 uppercase">
+        Resources
+      </h2>
+      <p class="text-foreground/60 text-3xl max-w-md">
+        Resources to speed your workflow.
+      </p>
+      <div class="noise-effect"></div>
+    </div>
+    <div
+      class="flex flex-col px-8 gap-5 items-center background-card justify-center flex-[0.8_0_0px] right-grid-boxes background-card"
+    >
+      <div class="noise-effect"></div>
+
+      <h3 class="text-foreground/60 text-3xl max-w-xl">
+        Have a project in mind?
+      </h3>
+      <Button
+        className="rounded-xl text-gray-400 text-xl  z-20 py-8 font-light"
+      >
+        Copy Email
+        <Copy class="ml-4 scale-x-[-1]" />
+      </Button>
+    </div>
   </div>
 </div>

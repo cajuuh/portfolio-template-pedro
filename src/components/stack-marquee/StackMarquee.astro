@@ -4,28 +4,19 @@ import { Image } from "astro:assets";
 const imageFiles = await Astro.glob("../../assets/*");
 ---
 
-<div class="flex gap-12 h-24 items-center justify-center marquee relative">
+<div class="flex gap-16 h-24 items-center justify-center marquee relative">
   {
     imageFiles.map((img) => (
-      <span class="h-24 flex items-center justify-center w-24 rounded-2xl bg-foreground/10">
+      <span class="h-20 w-20 flex items-center justify-center  rounded-2xl bg-foreground/10">
         <Image
           src={img.default}
           alt="image"
-          class="object-contain h-14 w-14 rounded-2xl bg-foreground/10"
+          class="object-contain h-12 w-12 rounded-2xl bg-foreground/10"
         />
       </span>
     ))
   }
-  <!-- <span class="h-24 w-24 rounded-2xl bg-foreground/10"></span>
-  <span class="h-24 w-24 rounded-2xl bg-foreground/10"></span>
-  <span class="h-24 w-24 rounded-2xl bg-foreground/10"></span>
-  <span class="h-24 w-24 rounded-2xl bg-foreground/10"></span>
-  <span class="h-24 w-24 rounded-2xl bg-foreground/10"></span> -->
 </div>
-
-<!-- <figure>
-  <figcaption class="sr-ony"></figcaption>
-</figure> -->
 
 <style>
   .marquee span {
@@ -43,13 +34,13 @@ const imageFiles = await Astro.glob("../../assets/*");
 </style>
 
 <script type="module">
-  const offset = 10;
+  const offset = 15;
   let left = 0;
 
-  const speed = 1;
+  const normalSpeed = 1;
+  const slowSpeed = 0.5;
+  let speed = normalSpeed;
   const stack = [];
-
-  let pause = false;
 
   const marqueeElements = document.querySelectorAll(".marquee span");
 
@@ -61,31 +52,29 @@ const imageFiles = await Astro.glob("../../assets/*");
   });
 
   function marqueeAnimate() {
-    if (!pause) {
-      marqueeElements.forEach((marqueeElement) => {
-        const currentLeft = parseFloat(getComputedStyle(marqueeElement).left);
-        const newLeft = currentLeft - speed;
+    marqueeElements.forEach((marqueeElement) => {
+      const currentLeft = parseFloat(getComputedStyle(marqueeElement).left);
+      const newLeft = currentLeft - speed;
 
-        marqueeElement.style.left = `${newLeft}px`;
+      marqueeElement.style.left = `${newLeft}px`;
 
-        if (newLeft + marqueeElement.offsetWidth < -130) {
-          const firstElement = stack.shift();
-          const lastElement = stack[stack.length - 1];
-          marqueeElement.style.left = `${parseFloat(getComputedStyle(lastElement).left) + lastElement.offsetWidth + offset}px`;
-          stack.push(marqueeElement);
-        }
-      });
-    }
+      if (newLeft + marqueeElement.offsetWidth < -130) {
+        const firstElement = stack.shift();
+        const lastElement = stack[stack.length - 1];
+        marqueeElement.style.left = `${parseFloat(getComputedStyle(lastElement).left) + lastElement.offsetWidth + offset}px`;
+        stack.push(marqueeElement);
+      }
+    });
     requestAnimationFrame(marqueeAnimate);
   }
   requestAnimationFrame(marqueeAnimate);
 
   const marqueeContainer = document.querySelector(".marquee");
   marqueeContainer.addEventListener("mouseenter", () => {
-    pause = true;
+    speed = slowSpeed;
   });
 
   marqueeContainer.addEventListener("mouseleave", () => {
-    pause = false;
+    speed = normalSpeed;
   });
 </script>

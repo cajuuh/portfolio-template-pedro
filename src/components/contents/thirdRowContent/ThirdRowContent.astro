@@ -1,27 +1,115 @@
 ---
 import { ModeToggle } from "@/components/ModeToggle";
 import StackMarquee from "@/components/stack-marquee/StackMarquee.astro";
+import { getCollection } from "astro:content";
+
+const experiences = await getCollection("experience");
 ---
 
 <div
   class="min-h-96 grid-boxes lg:min-h-fit w-full grid grid-cols-1 gap-3 overflow-hidden *:rounded-[2.1rem] lg:grid-cols-2"
 >
-  <div class="order-2 lg:order-1 bg-green-300 grid-boxes"></div>
+  <div class="order-2 lg:order-1 background-card grid-boxes">
+    <h3 class="text-foreground/60 text-3xl max-w-md">Experience</h3>
+    <div id="experience-container" class="relative overflow-hidden h-48">
+      {
+        experiences.map((experience, index) => (
+          <div
+            class="experience-item absolute inset-0 flex flex-col items-start gap-4 transition-all duration-500 ease-in-out"
+            data-index={index}
+          >
+            <div class="flex items-center gap-2">
+              <img
+                src={experience.data.logo}
+                alt={`${experience.data.company} Logo`}
+                class="w-10 h-10 object-contain"
+              />
+              <div>
+                <p class="text-xl font-bold">{experience.data.position}</p>
+                <p class="text-foreground/60">{experience.data.company}</p>
+              </div>
+            </div>
+            <p class="text-foreground/60">
+              Time Worked: {experience.data.timeWorked}
+            </p>
+            {/* <div class="content">{experience.content}</div> */}
+          </div>
+        ))
+      }
+    </div>
+    <div class="noise-effect"></div>
+  </div>
   <div class="flex gap-2 *:rounded-[2.1rem] order-1 lg:order-2">
     <div
-      class="flex flex-[1_0_0px] flex-col overflow-hidden gap-5 w-full p-8 pt-12 grid-boxes background-card"
+      class="flex flex-[1_0_0px] flex-col overflow-hidden gap-10 w-full p-8 py-12 grid-boxes background-card"
     >
-      <h3 class="text-foreground/60 text-2xl max-w-md">Stack i use</h3>
+      <h3 class="text-foreground/60 text-3xl max-w-md">Stack i use</h3>
       <StackMarquee />
-
       <div class="noise-effect"></div>
     </div>
     <div
       class="flex items-center justify-center background-card flex-[0.6_0_0px] w-full grid-boxes"
     >
       <ModeToggle client:load />
-
       <div class="noise-effect"></div>
     </div>
   </div>
 </div>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const experienceContainer = document.getElementById("experience-container");
+    const experienceItems = document.querySelectorAll(".experience-item");
+    let currentIndex = 0;
+
+    // Set up initial positions
+    experienceItems.forEach((item, index) => {
+      item.style.transition = "opacity 0.5s, transform 0.5s";
+      item.style.opacity = index === 0 ? "1" : "0";
+      item.style.transform = index === 0 ? "translateY(0)" : "translateY(100%)";
+      item.style.position = "absolute";
+      item.style.top = "0";
+      item.style.left = "0";
+      item.style.width = "100%";
+    });
+
+    function transitionExperiences() {
+      const currentItem = experienceItems[currentIndex];
+      const nextIndex = (currentIndex + 1) % experienceItems.length;
+      const nextItem = experienceItems[nextIndex];
+
+      // Move current item up and fade out
+      currentItem.style.opacity = "0";
+      currentItem.style.transform = "translateY(-100%)";
+
+      // Prepare next item to come from bottom
+      nextItem.style.transform = "translateY(100%)";
+      nextItem.style.opacity = "0";
+
+      // Slight delay before bringing in the next item
+      setTimeout(() => {
+        nextItem.style.opacity = "1";
+        nextItem.style.transform = "translateY(0)";
+
+        // Reset the previous item to bottom (off-screen) after it's moved up
+        setTimeout(() => {
+          currentItem.style.transform = "translateY(100%)";
+        }, 500);
+
+        currentIndex = nextIndex;
+      }, 250);
+    }
+
+    // Start the transition loop
+    const transitionInterval = setInterval(transitionExperiences, 2000); // Change every 5 seconds
+
+    // Optional: Pause on hover
+    experienceContainer.addEventListener("mouseenter", () => {
+      clearInterval(transitionInterval);
+    });
+
+    experienceContainer.addEventListener("mouseleave", () => {
+      setInterval(transitionExperiences, 1000);
+    });
+  });
+</script>

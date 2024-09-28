@@ -1,7 +1,8 @@
 {
-  "name": "prabesh-dangi-portfolio",
+  "name": "modern-portfolio-by-bajrayejoon",
   "type": "module",
   "version": "0.0.1",
+  "author": "Binaya Bajracharya - bajrayejoon",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

@@ -62,6 +62,8 @@ const experiences = await getCollection("experience");
     const experienceItems = document.querySelectorAll(".experience-item");
     let currentIndex = 0;
 
+    let pause = false;
+
     // Set up initial positions
     experienceItems.forEach((item, index) => {
       item.style.transition = "opacity 0.5s, transform 0.5s";
@@ -74,42 +76,44 @@ const experiences = await getCollection("experience");
     });
 
     function transitionExperiences() {
-      const currentItem = experienceItems[currentIndex];
-      const nextIndex = (currentIndex + 1) % experienceItems.length;
-      const nextItem = experienceItems[nextIndex];
+      if (!pause) {
+        const currentItem = experienceItems[currentIndex];
+        const nextIndex = (currentIndex + 1) % experienceItems.length;
+        const nextItem = experienceItems[nextIndex];
 
-      // Move current item up and fade out
-      currentItem.style.opacity = "0";
-      currentItem.style.transform = "translateY(-100%)";
+        // Move current item up and fade out
+        currentItem.style.opacity = "0";
+        currentItem.style.transform = "translateY(-100%)";
 
-      // Prepare next item to come from bottom
-      nextItem.style.transform = "translateY(100%)";
-      nextItem.style.opacity = "0";
+        // Prepare next item to come from bottom
+        nextItem.style.transform = "translateY(100%)";
+        nextItem.style.opacity = "0";
 
-      // Slight delay before bringing in the next item
-      setTimeout(() => {
-        nextItem.style.opacity = "1";
-        nextItem.style.transform = "translateY(0)";
-
-        // Reset the previous item to bottom (off-screen) after it's moved up
+        // Slight delay before bringing in the next item
         setTimeout(() => {
-          currentItem.style.transform = "translateY(100%)";
-        }, 500);
+          nextItem.style.opacity = "1";
+          nextItem.style.transform = "translateY(0)";
 
-        currentIndex = nextIndex;
-      }, 250);
+          // Reset the previous item to bottom (off-screen) after it's moved up
+          setTimeout(() => {
+            currentItem.style.transform = "translateY(100%)";
+          }, 500);
+
+          currentIndex = nextIndex;
+        }, 250);
+      }
     }
 
     // Start the transition loop
-    const transitionInterval = setInterval(transitionExperiences, 2000); // Change every 5 seconds
+    setInterval(transitionExperiences, 2000); // Change every 5 seconds
 
     // Optional: Pause on hover
     experienceContainer.addEventListener("mouseenter", () => {
-      clearInterval(transitionInterval);
+      pause = true;
     });
 
     experienceContainer.addEventListener("mouseleave", () => {
-      setInterval(transitionExperiences, 1000);
+      pause = false;
     });
   });
 </script>

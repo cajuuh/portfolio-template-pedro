@@ -1,6 +1,7 @@
 ---
 import { Fragment } from "astro/jsx-runtime";
 import { ArrowUpRight } from "lucide-astro";
+import DrawerComp from "../drawer/Drawer";
 ---
 
 <div class="relative h-full w-full group">
@@ -19,6 +20,8 @@ import { ArrowUpRight } from "lucide-astro";
       class="h-8 w-8 border-2 border-foreground/50 hover-card-icon opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-full"
     >
       <ArrowUpRight />
+
+      <DrawerComp client:load />
     </div>
   </div>
 </div>

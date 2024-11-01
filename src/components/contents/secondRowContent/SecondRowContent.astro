@@ -3,30 +3,19 @@ import ArrowHoverAnimation from "@/components/arrowHoverAnimation/ArrowHoverAnim
 import HoverCard from "@/components/hoverCard/HoverCard.astro";
 ---
 
-<div
-  class="grid grid-cols-4 gap-4 lg:grid-cols-6 *:h-full custom-class *:rounded-[2.1rem] lg:grid-rows-1"
->
-  <div
-    class="hidden sm:block sm:col-span-1 bg-white overflow-hidden grid-boxes"
-  >
-    <img src="/portrait.avif" class="object-cover h-full w-full" />
+<div class="grid grid-cols-1 gap-3 sm:grid-cols-4 lg:grid-cols-6 lg:grid-rows-1 mt-3">
+  <div class="hidden sm:block sm:col-span-1 bg-white overflow-hidden grid-boxes rounded-[2.1rem]">
+    <img src="/portrait.avif" class="object-cover h-full w-full" alt="Portrait" />
   </div>
-  <div
-    class="col-span-4 flex flex-col items-start justify-start sm:col-span-3 gap-8 lg:col-span-3 background-card p-10 grid-boxes"
-  >
-    <ArrowHoverAnimation />
-    <h2 class="text-lg font-light tracking-widest text-gray-500">ABOUT</h2>
-    <p class="text-foreground/60 text-3xl max-w-lg">
+  <div class="col-span-1 sm:col-span-3 lg:col-span-3 background-card p-4 lg:p-6 grid-boxes rounded-[2.1rem] flex flex-col items-start justify-start gap-4 lg:gap-6">
+    <h2 class="text-base lg:text-lg font-light tracking-widest text-gray-500">ABOUT</h2>
+    <p class="text-foreground/60 text-xl lg:text-2xl max-w-lg">
       Passionate about design and enjoy solving problems.
     </p>
     <div class="noise-effect"></div>
   </div>
-  <div
-    class="col-span-4 h-72 relative lg:col-span-2 flex flex-col grid-boxes lg:h-full flex-1 group grid-boxes border bg-background/70 border-foreground/20 overflow-hidden"
-  >
-    <div
-      class="absolute inset-0 bg-[url('/project3.webp')] scale-110 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-100"
-    >
+  <div class="col-span-1 sm:col-span-4 lg:col-span-2 relative flex flex-col grid-boxes border bg-background/70 border-foreground/20 overflow-hidden rounded-[2.1rem] min-h-[200px] lg:min-h-0">
+    <div class="absolute inset-0 bg-[url('/project3.webp')] scale-110 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-100">
     </div>
     <HoverCard />
   </div>

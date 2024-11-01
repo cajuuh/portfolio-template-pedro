@@ -2,43 +2,26 @@
 import HoverCard from "@/components/hoverCard/HoverCard.astro";
 ---
 
-<div
-  class="lg:min-h-fit w-full grid grid-cols-1 gap-3 overflow-hidden rounded-3xl lg:grid-cols-2"
->
-  <div
-    class="h-[150px] rounded-3xl lg:h-full border background-card grid-boxes flex items-center justify-center"
-  >
-    <div class="flex flex-col gap-7 m-20 max-w-lg z-20">
-      <h1 class="text-3xl font-semibold text-foreground/60">
-        Hi, I'm Tamer Doe -
+<div class="w-full grid grid-cols-1 gap-3 lg:grid-cols-2 lg:min-h-[400px]">
+  <div class="rounded-3xl border background-card grid-boxes flex items-center justify-center p-4 lg:p-6">
+    <div class="flex flex-col gap-4 lg:gap-5 max-w-lg z-20">
+      <h1 class="text-xl lg:text-2xl font-semibold text-foreground/60">
+        Hello, This is Pedro Alcântara.
       </h1>
-      <p class="text-2xl font-extralight tracking-wide text-foreground/50">
-        Lead product designer, currently working at <span class="underline"
-          >mano</span
-        > based in Cairo
+      <p class="text-lg lg:text-xl font-extralight tracking-wide text-foreground/50">
+        Front-end engineer at <a href="https://dexian.com" class="underline">Dexian</a> based in Brazil 🇧🇷
       </p>
     </div>
     <div class="noise-effect"></div>
   </div>
-  <div
-    class="flex gap-2 *:border *:border-foreground/10 *:rounded-[2.1rem] lg:h-full"
-  >
-    <div
-      class="relative h-44 lg:h-full flex-1 group grid-boxes border bg-background/70 border-foreground/40 overflow-hidden"
-    >
-      <div
-        class="absolute inset-0 bg-[url('/project1.webp')] scale-125 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-110"
-      >
+  <div class="flex flex-col lg:flex-row gap-2 h-full">
+    <div class="relative flex-1 group grid-boxes border bg-background/70 border-foreground/40 overflow-hidden rounded-[2.1rem] min-h-[200px] lg:min-h-0">
+      <div class="absolute inset-0 bg-[url('/project1.webp')] scale-125 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-110">
       </div>
       <HoverCard />
     </div>
-
-    <div
-      class="relative h-44 lg:h-full flex-1 group grid-boxes border bg-background/70 border-foreground/10 overflow-hidden"
-    >
-      <div
-        class="absolute inset-0 bg-[url('/project2.webp')] scale-110 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-100"
-      >
+    <div class="relative flex-1 group grid-boxes border bg-background/70 border-foreground/10 overflow-hidden rounded-[2.1rem] min-h-[200px] lg:min-h-0">
+      <div class="absolute inset-0 bg-[url('/project2.webp')] scale-110 bg-cover brightness-75 bg-center transition-transform duration-700 ease-in-out group-hover:scale-100">
       </div>
       <HoverCard />
     </div>

@@ -6,59 +6,49 @@ import { getCollection } from "astro:content";
 const experiences = await getCollection("experience");
 ---
 
-<div
-  class="min-h-96 grid-boxes lg:min-h-fit w-full grid grid-cols-1 gap-3 overflow-hidden *:rounded-[2.1rem] lg:grid-cols-2"
->
-  <div
-    class="order-2 lg:order-1 background-card space-y-6 grid-boxes pt-16 px-6"
-  >
-    <h3 class="text-foreground/60 text-3xl max-w-md">Experience</h3>
-    <div id="experience-container" class="relative overflow-hidden h-24">
-      {
-        experiences.map((experience, index) => (
-          <div
-            class="experience-item absolute inset-0 flex justify-between items-start gap-4 transition-all duration-500 ease-in-out"
-            data-index={index}
-          >
-            <div class="flex items-center gap-2">
-              <img
-                src={experience.data.logo}
-                alt={`${experience.data.company} Logo`}
-                class="w-10 h-10 object-contain"
-              />
-              <div>
-                <p class="text-2xl font-bold">{experience.data.position}</p>
-                <p class="text-foreground/60">{experience.data.company}</p>
-              </div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full mt-3">
+  <div class="order-2 lg:order-1 background-card space-y-4 lg:space-y-6 grid-boxes pt-6 lg:pt-8 px-4 lg:px-6 rounded-[2.1rem]">
+    <h3 class="text-foreground/60 text-xl lg:text-2xl max-w-md">Experience</h3>
+    <div id="experience-container" class="relative overflow-hidden h-20 lg:h-24">
+      {experiences.map((experience, index) => (
+        <div
+          class="experience-item absolute inset-0 flex justify-between items-start gap-2 lg:gap-4 transition-all duration-500 ease-in-out"
+          data-index={index}
+        >
+          <div class="flex items-center gap-2">
+            <img
+              src={experience.data.logo}
+              alt={`${experience.data.company} Logo`}
+              class="w-6 h-6 lg:w-8 lg:h-8 object-contain"
+            />
+            <div>
+              <p class="text-lg lg:text-xl font-bold">{experience.data.position}</p>
+              <p class="text-xs lg:text-sm text-foreground/60">{experience.data.company}</p>
             </div>
-            <p class="text-foreground/60">{experience.data.timeWorked}</p>
           </div>
-        ))
-      }
+          <p class="text-xs lg:text-sm text-foreground/60">{experience.data.timeWorked}</p>
+        </div>
+      ))}
     </div>
     <div class="noise-effect"></div>
   </div>
-  <div class="flex gap-2 *:rounded-[2.1rem] order-1 lg:order-2">
-    <div
-      class="flex flex-[1_0_0px] flex-col overflow-hidden gap-10 w-full p-8 py-12 grid-boxes background-card"
-    >
-      <h3 class="text-foreground/60 text-3xl max-w-md">Stack i use</h3>
+  <div class="flex flex-col lg:flex-row gap-2 order-1 lg:order-2">
+    <div class="flex-1 overflow-hidden rounded-[2.1rem] background-card p-4 lg:p-6 grid-boxes">
+      <h3 class="text-foreground/60 text-xl lg:text-2xl max-w-md mb-4 lg:mb-6">Stack I use</h3>
       <StackMarquee />
       <div class="noise-effect"></div>
     </div>
-    <div
-      class="flex items-center justify-center background-card flex-[0.6_0_0px] w-full grid-boxes"
-    >
+    <div class="flex items-center justify-center background-card rounded-[2.1rem] grid-boxes p-4 lg:w-20">
       <ModeToggle client:load />
       <div class="noise-effect"></div>
     </div>
   </div>
 </div>
 
-<script type="module">
+<script>
   document.addEventListener("DOMContentLoaded", () => {
     const experienceContainer = document.getElementById("experience-container");
-    const experienceItems = document.querySelectorAll(".experience-item");
+    const experienceItems = document.querySelectorAll<HTMLElement>(".experience-item");
     let currentIndex = 0;
 
     let pause = false;
@@ -80,34 +70,38 @@ const experiences = await getCollection("experience");
         const nextIndex = (currentIndex + 1) % experienceItems.length;
         const nextItem = experienceItems[nextIndex];
 
-        currentItem.style.opacity = "0";
-        currentItem.style.transform = "translateY(-100%)";
+        if (currentItem && nextItem) {
+          currentItem.style.opacity = "0";
+          currentItem.style.transform = "translateY(-100%)";
 
-        nextItem.style.transform = "translateY(100%)";
-        nextItem.style.opacity = "0";
-
-        setTimeout(() => {
-          nextItem.style.opacity = "1";
-          nextItem.style.transform = "translateY(0)";
+          nextItem.style.transform = "translateY(100%)";
+          nextItem.style.opacity = "0";
 
           setTimeout(() => {
-            currentItem.style.transform = "translateY(100%)";
-          }, 500);
+            nextItem.style.opacity = "1";
+            nextItem.style.transform = "translateY(0)";
 
-          currentIndex = nextIndex;
-        }, 250);
+            setTimeout(() => {
+              currentItem.style.transform = "translateY(100%)";
+            }, 500);
+
+            currentIndex = nextIndex;
+          }, 250);
+        }
       }
     }
 
     setInterval(transitionExperiences, 2000);
 
     // Optional: Pause on hover
-    experienceContainer.addEventListener("mouseenter", () => {
-      pause = true;
-    });
+    if (experienceContainer) {
+      experienceContainer.addEventListener("mouseenter", () => {
+        pause = true;
+      });
 
-    experienceContainer.addEventListener("mouseleave", () => {
-      pause = false;
-    });
+      experienceContainer.addEventListener("mouseleave", () => {
+        pause = false;
+      });
+    }
   });
 </script>

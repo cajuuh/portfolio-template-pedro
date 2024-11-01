@@ -18,28 +18,25 @@ export function ModeToggle() {
   };
 
   return (
-    <div
-      className="background-card relative h-14 w-24 cursor-pointer rounded-full border-white"
+    <button
+      className="relative h-20 w-10 rounded-full bg-gray-900/90 p-1 shadow-inner transition-colors duration-300 ease-in-out hover:bg-gray-900/80 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       onClick={toggleTheme}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       <div
-        className={`absolute h-12 w-12 rounded-full bg-black transition-transform duration-300 ease-in-out dark:bg-black ${
-          theme === "dark" ? "translate-x-10" : "translate-x-0"
+        className={`absolute left-1 flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-700 ${
+          theme === "dark" ? "top-[calc(100%-2.25rem)]" : "top-1"
         }`}
       >
-        <Sun
-          fill="yellow"
-          className={`absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 brightness-75 transition-opacity duration-300 ${
-            theme === "dark" ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-          }`}
-        />
-        <Moon
-          fill="yellow"
-          className={`absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 brightness-75 transition-opacity duration-300 ${
-            theme === "dark" ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"
-          }`}
-        />
+        {theme === "light" ? (
+          <Sun className="h-5 w-5 text-yellow-400" />
+        ) : (
+          <Moon className="h-5 w-5 text-blue-300" />
+        )}
       </div>
-    </div>
+      <span className="sr-only">
+        {theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+      </span>
+    </button>
   );
 }

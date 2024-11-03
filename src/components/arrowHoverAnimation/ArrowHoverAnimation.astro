@@ -3,63 +3,52 @@
 import { ArrowUpRight } from "lucide-astro";
 ---
 
-<!-- <div class="relative h-full w-full group"> -->
 <div
-  class="absolute bottom-7 right-7 p-1 border-2 border-foreground/20 rounded-full flex items-center justify-center transition-opacity duration-300 ease-in-out card-arrow"
+  class="absolute bottom-7 right-7 p-1 border-2 border-foreground/20 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out card-arrow"
 >
-  <!-- <ArrowUpRight class="text-black arrow-1 duration-300 ease-in-out" /> -->
   <ArrowUpRight
-    class="text-gray-500 arrow-2 duration-300 ease-in-out"
+    class="text-gray-500 arrow-icon duration-300 ease-in-out"
     size={30}
   />
 </div>
-<!-- </div> -->
 
-<script is:inline>
-  import { animate } from "motion";
+<script>
+  import { animate, type ElementOrSelector } from "motion";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const hoverCard = document.querySelector(".arrow-boxes");
+  document.addEventListener("astro:page-load", () => {
+    const hoverCards = document.querySelectorAll(".arrow-boxes");
 
-    hoverCard.forEach((hoverCard) => {
-      const cardarrow = hoverCard.querySelector(".card-arrow");
-      const arrow1 = hoverCard.querySelector(".arrow-1");
-      const arrow2 = hoverCard.querySelector(".arrow-2");
+    hoverCards.forEach((hoverCard) => {
+      const cardArrow = hoverCard.querySelector(".card-arrow");
+      const arrowIcon = cardArrow?.querySelector(".arrow-icon");
 
-      hoverCard.addEventListener("mouseenter", () => {
-        animate(
-          cardarrow,
-          {
-            color: ["rgb(255 255 255)", "rgb(0 0 0)"],
-          },
-          { duration: 0.3 }
-        );
-        animate(
-          cardarrow,
+      if (cardArrow instanceof HTMLElement && arrowIcon instanceof HTMLElement) {
+        hoverCard.addEventListener("mouseenter", () => {
+          animate(
+            cardArrow as ElementOrSelector,
+            { rotate: 45 },
+            { duration: 0.3 }
+          );
+          animate(
+            arrowIcon as ElementOrSelector,
+            { color: "#000000" },
+            { duration: 0.3 }
+          );
+        });
 
-          { rotate: [0, 45] },
-          { duration: 0.3, delay: 0.1 }
-        );
-      });
-
-      hoverCard.addEventListener("mouseleave", () => {
-        animate(
-          cardarrow,
-          {
-            transform: ["translateY(-10px)", "translateY(0)"],
-            opacity: [1, 0.5],
-          },
-          { duration: 0.3 }
-        );
-        animate(
-          cardarrow,
-          {
-            transform: ["translateY(10px)", "translateY(0)"],
-            opacity: [0.5, 1],
-          },
-          { duration: 0.3, delay: 0.1 }
-        );
-      });
+        hoverCard.addEventListener("mouseleave", () => {
+          animate(
+            cardArrow as ElementOrSelector,
+            { rotate: 0 },
+            { duration: 0.3 }
+          );
+          animate(
+            arrowIcon as ElementOrSelector,
+            { color: "#6B7280" },
+            { duration: 0.3 }
+          );
+        });
+      }
     });
   });
 </script>

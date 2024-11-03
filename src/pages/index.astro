@@ -1,9 +1,7 @@
 ---
-// import { ModeToggle } from "@/components/ModeToggle";
 import CustomAnimatedCursor from "@/components/animated-cursor/AnimatedCursor";
 import Layout from "../layouts/Layout.astro";
 import Grid from "@/components/Grid.astro";
-// import CustomAnimatedCursor from "@/components/animated-cursor/AnimatedCursor";
 ---
 
 <script is:inline>
@@ -32,8 +30,9 @@ import Grid from "@/components/Grid.astro";
 
 <Layout title="Welcome to Astro.">
   <CustomAnimatedCursor client:load />
-  <Grid />
-  <!-- <ModeToggle client:load /> -->
+  <div class="min-h-screen overflow-y-auto">
+    <Grid />
+  </div>
 </Layout>
 
 <script>
@@ -68,3 +67,9 @@ import Grid from "@/components/Grid.astro";
     );
   });
 </script>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

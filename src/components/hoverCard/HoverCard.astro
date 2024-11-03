@@ -1,7 +1,13 @@
 ---
-import { Fragment } from "astro/jsx-runtime";
 import { ArrowUpRight } from "lucide-astro";
 import DrawerComp from "../drawer/Drawer";
+
+interface Props {
+  cardText: string;
+}
+
+const { cardText = "Text Card 1" } = Astro.props;
+
 ---
 
 <div class="relative h-full w-full group">
@@ -10,24 +16,23 @@ import DrawerComp from "../drawer/Drawer";
   >
   </div>
   <div
-    class="absolute bottom-4 px-6 pb-3 rounded-md w-full flex items-center justify-between text-foreground/50"
+    class="absolute bottom-4 px-4 pb-2 rounded-md w-full flex items-center justify-between text-foreground/50"
   >
     <span
-      class="text-foreground/50 opacity-0 hover-card-content group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0"
-      >Your Text Here</span
+      class="text-foreground/50 text-sm lg:text-base opacity-0 hover-card-content group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
+      >{cardText}</span
     >
     <div
-      class="h-8 w-8 border-2 border-foreground/50 hover-card-icon opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-full"
+      class="h-7 w-7 lg:h-8 lg:w-8 border-2 border-foreground/50 hover-card-icon opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-full transition-all duration-300"
     >
-      <ArrowUpRight />
-
+      <ArrowUpRight class="w-4 h-4 lg:w-5 lg:h-5" />
       <DrawerComp client:load />
     </div>
   </div>
 </div>
 
 <script>
-  import { animate } from "motion";
+  import { animate, spring } from "motion";
 
   document.addEventListener("DOMContentLoaded", () => {
     const hoverCards = document.querySelectorAll(".group");
@@ -47,9 +52,8 @@ import DrawerComp from "../drawer/Drawer";
           );
           animate(
             hoverCardIcon,
-
-            { rotate: [0, 45] },
-            { duration: 0.5, delay: 0.2 }
+            { opacity: [0, 1], scale: [0.8, 1], rotate: [0, 45] },
+            { duration: 0.3, delay: 0.2, easing: spring({ stiffness: 200, damping: 10 }) }
           );
         });
 
@@ -60,7 +64,11 @@ import DrawerComp from "../drawer/Drawer";
             { opacity: [1, 0], y: [0, 10] },
             { duration: 0.3 }
           );
-          animate(hoverCardIcon, { rotate: [45, 0] }, { duration: 0.5 });
+          animate(
+            hoverCardIcon,
+            { opacity: [1, 0], scale: [1, 0.8], rotate: [45, 0] },
+            { duration: 0.3, easing: spring({ stiffness: 200, damping: 10 }) }
+          );
         });
       }
     });

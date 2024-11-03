@@ -1,6 +1,6 @@
 ---
-company: "Company A"
-logo: "/src/assets/asset 4.webp"
-position: "Frontend Developer"
-timeWorked: "Jan 2020 - Present"
+company: "The Home Depot"
+logo: "/src/assets/theHomeDepot.jpg"
+position: "Frontend Engineer"
+timeWorked: "Nov 2023 - Present"
 ---

@@ -8,7 +8,7 @@
        URL: https://gradient.page */
 
     /* CSS: .bg-gradient { background: var(--gradient) } */
-    --gradient: #00FF7F;
+    --gradient: #00ff7f;
 
     --background: 159 65% 4%;
     --foreground: 159 10% 97.5%;
@@ -40,47 +40,45 @@
     --ring: 159 100% 50%;
   }
   .dark {
-   /* CSS: .bg-gradient { background: var(--gradient) } */
-   --gradient: linear-gradient(to top left,#536976,#292E49);
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: linear-gradient(to top left, #536976, #292e49);
 
-   --background:0, 0%, 8%;
-   --foreground: 215 1.7000000000000002% 97%;
+    --background: 0, 0%, 8%;
+    --foreground: 215 1.7000000000000002% 97%;
 
-   --muted: 215 8.5% 12%;
-   --muted-foreground: 215 1.7000000000000002% 54%;
+    --muted: 215 8.5% 12%;
+    --muted-foreground: 215 1.7000000000000002% 54%;
 
-   --popover: 215 61.6% 5.2%;
-   --popover-foreground: 215 1.7000000000000002% 97%;
+    --popover: 215 61.6% 5.2%;
+    --popover-foreground: 215 1.7000000000000002% 97%;
 
-   --card: 215 61.6% 5.2%;
-   --card-foreground: 215 1.7000000000000002% 97%;
+    --card: 215 61.6% 5.2%;
+    --card-foreground: 215 1.7000000000000002% 97%;
 
-   --border: 215 8.5% 12%;
-   --input: 215 8.5% 12%;
+    --border: 215 8.5% 12%;
+    --input: 215 8.5% 12%;
 
-   --primary: 215 17% 40%;
-   --primary-foreground: 215 1.7000000000000002% 97%;
+    --primary: 215 17% 40%;
+    --primary-foreground: 215 1.7000000000000002% 97%;
 
-   --secondary: 215 8.5% 12%;
-   --secondary-foreground: 215 1.7000000000000002% 97%;
+    --secondary: 215 8.5% 12%;
+    --secondary-foreground: 215 1.7000000000000002% 97%;
 
-   --accent: 215 8.5% 12%;
-   --accent-foreground: 215 1.7000000000000002% 97%;
+    --accent: 215 8.5% 12%;
+    --accent-foreground: 215 1.7000000000000002% 97%;
 
-   --destructive: 0 62.8% 30.6%;
-   --destructive-foreground: 215 1.7000000000000002% 97%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 215 1.7000000000000002% 97%;
 
-   --ring: 215 17% 40%;
+    --ring: 215 17% 40%;
   }
 }
 
-
-body{
+body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
- background: #000000
-
+  background: #000000;
 }
 
 @layer base {
@@ -88,7 +86,7 @@ body{
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-portfolio;
+    @apply bg-background font-portfolio text-foreground;
   }
 }
 
@@ -97,8 +95,7 @@ body{
 } */
 
 .social-media div svg {
-  @apply h-8 w-8 md:h-14 md:w-14 lg:h-10 lg:w-10 font-light ;
-
+  @apply h-8 w-8 font-light md:h-14 md:w-14 lg:h-10 lg:w-10;
 }
 
 .noise-effect {
@@ -116,5 +113,5 @@ body{
 }
 
 .background-card {
-  @apply border relative bg-foreground/[0.02] border-foreground/10
+  @apply relative border border-foreground/10 bg-foreground/[0.02];
 }
